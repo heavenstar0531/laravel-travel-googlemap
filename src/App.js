@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { CssBaseline, Grid } from '@material-ui/core';
 
@@ -7,7 +7,18 @@ import Header from './components/Header/header.component';
 import List from './components/List/list.component';
 import Map from './components/Map/map.component';
 
+import { getPlacesData } from './services';
+
 function App() {
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    getPlacesData().then((data) => {
+      console.log(data);
+      setPlaces(data);
+    });
+  }, []);
+
   return (
     <Fragment>
       <CssBaseline />
