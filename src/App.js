@@ -12,12 +12,29 @@ import { getPlacesData } from './services';
 function App() {
   const [places, setPlaces] = useState([]);
 
+  const [coordinates, setCoordinates] = useState({});
+  const [bounds, setBounds] = useState(null);
+
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoordinates({ lat: latitude, lng: longitude });
+      },
+      (error) => {
+        alert(
+          'Please turn on your location access and refresh the page to continue.'
+        );
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log(coordinates, bounds);
     getPlacesData().then((data) => {
       console.log(data);
       setPlaces(data);
     });
-  }, []);
+  }, [bounds, coordinates]);
 
   return (
     <Fragment>
@@ -28,7 +45,11 @@ function App() {
           <List />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Map />
+          <Map
+            coordinates={coordinates}
+            setCoordinates={setCoordinates}
+            setBounds={setBounds}
+          />
         </Grid>
       </Grid>
     </Fragment>
