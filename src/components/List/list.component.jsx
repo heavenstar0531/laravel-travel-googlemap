@@ -13,19 +13,10 @@ import PlaceDetails from '../PlaceDetails/placeDetails.component';
 
 import useStyles from './list.styles';
 
-const List = () => {
+const List = ({ places }) => {
   const classes = useStyles();
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
-
-  const places = [
-    { name: 'Cool place' },
-    { name: 'Cool beer' },
-    { name: 'Cool steak' },
-    { name: 'Cool place' },
-    { name: 'Cool beer' },
-    { name: 'Cool steak' },
-  ];
 
   return (
     <div className={classes.container}>
