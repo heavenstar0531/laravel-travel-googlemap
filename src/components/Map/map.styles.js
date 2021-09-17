@@ -20,5 +20,7 @@ export default makeStyles(() => ({
   },
   pointer: {
     cursor: 'pointer',
+    maxHeight: '5rem',
+    marginBottom: '0.3rem',
   },
 }));
