@@ -16,7 +16,7 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './placeDetails.styles';
 
-const PlaceDetails = ({ place }) => {
+const PlaceDetails = ({ place, selected, refProp }) => {
   const {
     name,
     photo,
@@ -33,6 +33,10 @@ const PlaceDetails = ({ place }) => {
     num_reviews,
   } = place;
   const classes = useStyles();
+
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   return (
     <Fragment>
       {name && (
