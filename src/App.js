@@ -11,6 +11,7 @@ import { getPlacesData } from './services';
 
 function App() {
   const [places, setPlaces] = useState([]);
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
 
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState('');
@@ -42,6 +43,12 @@ function App() {
     });
   }, [type, bounds, coordinates]);
 
+  useEffect(() => {
+    const filteredPlaces = places?.filter((place) => place.rating > rating);
+
+    setFilteredPlaces(filteredPlaces);
+  }, [rating]);
+
   return (
     <Fragment>
       <CssBaseline />
@@ -49,7 +56,7 @@ function App() {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             childClicked={childClicked}
             isLoading={isLoading}
             type={type}
@@ -63,7 +70,7 @@ function App() {
             coordinates={coordinates}
             setCoordinates={setCoordinates}
             setBounds={setBounds}
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             setChildClicked={setChildClicked}
           />
         </Grid>

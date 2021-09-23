@@ -62,6 +62,15 @@ const List = ({
               <MenuItem value={4.5}>Above 4.5</MenuItem>
             </Select>
           </FormControl>
+          <Typography variant='subtitle1' className={classes.marginBottom}>
+            {places?.length > 0 ? (
+              `Showing ${places.length} results`
+            ) : (
+              <div className={classes.loading}>
+                <CircularProgress size='5rem' />
+              </div>
+            )}
+          </Typography>
           <Grid container spacing={3} className={classes.list}>
             {places?.map((place, index) => (
               <Grid ref={elRefs[index]} item key={index} xs={12}>
