@@ -14,7 +14,7 @@ function App() {
   const [filteredPlaces, setFilteredPlaces] = useState([]);
 
   const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState('');
+  const [bounds, setBounds] = useState();
   const [childClicked, setChildClicked] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -36,12 +36,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-      setPlaces(data);
-      setIsLoading(false);
-    });
-  }, [type, bounds, coordinates]);
+    if (bounds?.sw && bounds?.ne) {
+      setIsLoading(true);
+      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
+        setIsLoading(false);
+      });
+    }
+  }, [type, bounds]);
 
   useEffect(() => {
     const filteredPlaces = places?.filter((place) => place.rating > rating);
@@ -52,7 +54,7 @@ function App() {
   return (
     <Fragment>
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
