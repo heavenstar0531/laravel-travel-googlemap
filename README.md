@@ -14,9 +14,8 @@ Google Maps travel companion that helps you find hotels, attractions, weather, a
 1. `cd travel-mate`
 2. Install dependencies with `yarn` or `npm install`
 3. Set up your own environment variable using [Google Maps API](https://console.cloud.google.com/) and [Rapid API](https://rapidapi.com/apidojo/api/travel-advisor/), shown in `.envSAMPLE` file
-4. Run your server with `yarn start` | `npm start` (check [localhost:5000](http://localhost:5000/))
-5. Run your client side with `yarn start` | `npm start`
-6. Check your `localhost:3000`, for a local preview
+4. Run your app with `yarn start` | `npm start`
+5. Check your `localhost:3000`, for a local preview
 
 ---
 
